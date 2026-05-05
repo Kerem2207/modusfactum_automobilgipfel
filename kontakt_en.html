@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – German-Turkish Automotive Summit 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Be+Vietnam:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=23">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="images/logos/Turkishautomotive logo weiss.svg" alt="Logo" class="logo-white">
+            <img src="images/logos/Turkishautomotive logo blaue.svg" alt="Logo" class="logo-blue">
+        </div>
+        <nav class="header-nav">
+            <a href="index_en.html#about">About the Event</a>
+            <a href="veranstalter_en.html">Organizer</a>
+            <a href="download_en.html">Download</a>
+        </nav>
+        <div class="header-actions"><div class="lang-switch"><a href="kontakt.html">DE</a><span class="lang-divider">|</span><a href="#" class="active">EN</a></div><a href="kontakt_en.html" class="header-btn">Contact</a></div>
+        <button class="hamburger" onclick="document.querySelector('.header').classList.toggle('nav-open')">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <section class="page-hero">
+        <img src="images/backgrounds/blured_background.png" alt="" class="page-hero-bg">
+        <h1 class="page-hero-title">Contact</h1>
+    </section>
+
+    <section class="kontakt-content">
+        <div class="kontakt-wrapper">
+            <div class="kontakt-intro">
+                <h2>Get in touch</h2>
+                <p>Do you have questions about the event, registration, or a possible cooperation? Fill out the form – we will get back to you shortly.</p>
+                <div class="kontakt-info">
+                    <p><strong>Email:</strong> <a href="mailto:contact@turkishautomotive.de">contact@turkishautomotive.de</a></p>
+                </div>
+            </div>
+
+            <form class="kontakt-form" action="mailto:contact@turkishautomotive.de" method="post" enctype="text/plain">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vorname">First Name *</label>
+                        <input type="text" id="vorname" name="vorname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nachname">Last Name *</label>
+                        <input type="text" id="nachname" name="nachname" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefon">Phone</label>
+                        <input type="tel" id="telefon" name="telefon">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="unternehmen">Company</label>
+                    <input type="text" id="unternehmen" name="unternehmen">
+                </div>
+
+                <div class="form-group">
+                    <label for="betreff">Subject *</label>
+                    <input type="text" id="betreff" name="betreff" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nachricht">Message *</label>
+                    <textarea id="nachricht" name="nachricht" rows="6" required></textarea>
+                </div>
+
+                <div class="form-group form-checkbox">
+                    <input type="checkbox" id="datenschutz" name="datenschutz" required>
+                    <label for="datenschutz">I have read the privacy notice and agree to the processing of my data. *</label>
+                </div>
+
+                <button type="submit" class="form-submit">Send message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="images/logos/Turkishautomotive logo blaue.svg" alt="Logo">
+        </div>
+        <nav class="footer-nav">
+            <a href="index_en.html#about">About the Event</a>
+            <a href="veranstalter_en.html">Organizer</a>
+            <a href="download_en.html">Download</a>
+            <a href="impressum_en.html">Imprint</a>
+        </nav>
+    </footer>
+
+    <script>
+
+        if (location.hash) {
+            history.replaceState(null, '', location.pathname + location.search);
+            window.scrollTo(0, 0);
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            const href = a.getAttribute('href');
+            if (href.length < 2) return;
+            a.addEventListener('click', (e) => {
+                const target = document.getElementById(href.slice(1));
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({behavior:'smooth'});
+            });
+        });
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.hero, .page-hero').forEach(hero => {
+            const isHero = hero.classList.contains('hero');
+            const content = isHero ? hero.querySelector('.hero-content') : hero;
+            const targets = Array.from(content ? content.children : [])
+                .filter(el => !el.classList.contains('page-hero-bg'));
+            targets.forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 120) + 'ms';
+            });
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                targets.forEach(el => el.classList.add('visible'));
+            }));
+        });
+        document.querySelectorAll('section').forEach(section => {
+            if (section.classList.contains('hero') || section.classList.contains('page-hero')) return;
+            Array.from(section.children).forEach((el, i) => {
+                if (el.classList.contains('guests-bg') ||
+                    el.classList.contains('location-bg') ||
+                    el.classList.contains('page-hero-bg')) return;
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 100) + 'ms';
+            });
+        });
+        document.querySelectorAll('.guests-grid, .speakers-grid, .moderators-grid, .downloads-grid').forEach(grid => {
+            Array.from(grid.children).forEach((card, i) => {
+                card.classList.add('reveal');
+                card.style.transitionDelay = (i * 90) + 'ms';
+            });
+        });
+        document.querySelectorAll('.veranstalter-text > p, .impressum-block, .about-text > p').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.style.transitionDelay = ((i % 8) * 80) + 'ms';
+        });
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum – Deutsch-Türkischer Automobilgipfel 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Be+Vietnam:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=23">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="images/logos/Turkishautomotive logo weiss.svg" alt="Logo" class="logo-white">
+            <img src="images/logos/Turkishautomotive logo blaue.svg" alt="Logo" class="logo-blue">
+        </div>
+        <nav class="header-nav">
+            <a href="index.html#about">Über die Veranstaltung</a>
+            <a href="veranstalter.html">Veranstalter</a>
+            <a href="download.html">Download</a>
+        </nav>
+        <div class="header-actions"><div class="lang-switch"><a href="#" class="active">DE</a><span class="lang-divider">|</span><a href="impressum_en.html">EN</a></div><a href="kontakt.html" class="header-btn">Kontakt</a></div>
+        <button class="hamburger" onclick="document.querySelector('.header').classList.toggle('nav-open')">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <section class="page-hero">
+        <img src="images/backgrounds/blured_background.png" alt="" class="page-hero-bg">
+        <h1 class="page-hero-title">Impressum</h1>
+    </section>
+
+    <section class="impressum-content">
+        <div class="impressum-text">
+            <div class="impressum-block">
+                <h3>Uludağ Otomotiv Endüstrisi İhracatçıları Birliği (OİB)</h3>
+                <p>Geschäftsführer: Baran Celik</p>
+                <p>Isiktepe OSB Mahallesi</p>
+                <p>Kahverengi Caddesi No: 11</p>
+                <p>16215 Niküfer/Bursa</p>
+                <p>Türkiye</p>
+            </div>
+
+            <div class="impressum-block">
+                <h3>Kontakt</h3>
+                <p>E-Mail: <a href="mailto:contact@turkishautomotive.de">contact@turkishautomotive.de</a></p>
+            </div>
+
+            <div class="impressum-block">
+                <h3>Dispute Resolution</h3>
+                <p>The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.</p>
+                <p>Our email address can be found above in the legal notice.</p>
+                <p>We are neither willing nor obligated to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+            </div>
+
+            <div class="impressum-block">
+                <h3>Liability for Content</h3>
+                <p>In accordance with § 7 (1) TMG, we are responsible for our own content on these pages under general laws. However, according to §§ 8 to 10 TMG, we as a service provider are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.</p>
+                <p>Obligations to remove or block the use of information under general laws remain unaffected. Liability in this respect is only possible from the time we become aware of a specific legal violation. Upon becoming aware of such violations, we will promptly remove the content.</p>
+            </div>
+
+            <div class="impressum-block">
+                <h3>Liability for Links</h3>
+                <p>Our website may contain links to external third-party websites, over whose content we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking, and no unlawful content was detected at that time.</p>
+                <p>However, continuous monitoring of the linked pages' content is not reasonable without concrete indications of a legal violation. If we become aware of any legal violations, we will take appropriate action.</p>
+            </div>
+
+            <div class="impressum-block">
+                <h3>Copyright</h3>
+                <p>The content created by the website operator on these pages is subject to German copyright law. The use and any form of exploitation require prior written consent and must always comply with copyright regulations. Downloads and copies of this website are not permitted.</p>
+                <p>For content on this website that was not created by the operator, the copyrights of third parties are respected and marked accordingly. If you nevertheless notice a copyright infringement, please inform us. If we become aware of any copyright violations, we will immediately take corrective action.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="images/logos/Turkishautomotive logo blaue.svg" alt="Logo">
+        </div>
+        <nav class="footer-nav">
+            <a href="index.html#about">Über die Veranstaltung</a>
+            <a href="veranstalter.html">Veranstalter</a>
+            <a href="download.html">Download</a>
+            <a href="impressum.html">Impressum</a>
+        </nav>
+    </footer>
+
+    <script>
+
+        if (location.hash) {
+            history.replaceState(null, '', location.pathname + location.search);
+            window.scrollTo(0, 0);
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            const href = a.getAttribute('href');
+            if (href.length < 2) return;
+            a.addEventListener('click', (e) => {
+                const target = document.getElementById(href.slice(1));
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({behavior:'smooth'});
+            });
+        });
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.hero, .page-hero').forEach(hero => {
+            const isHero = hero.classList.contains('hero');
+            const content = isHero ? hero.querySelector('.hero-content') : hero;
+            const targets = Array.from(content ? content.children : [])
+                .filter(el => !el.classList.contains('page-hero-bg'));
+            targets.forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 120) + 'ms';
+            });
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                targets.forEach(el => el.classList.add('visible'));
+            }));
+        });
+        document.querySelectorAll('section').forEach(section => {
+            if (section.classList.contains('hero') || section.classList.contains('page-hero')) return;
+            Array.from(section.children).forEach((el, i) => {
+                if (el.classList.contains('guests-bg') ||
+                    el.classList.contains('location-bg') ||
+                    el.classList.contains('page-hero-bg')) return;
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i * 100) + 'ms';
+            });
+        });
+        document.querySelectorAll('.guests-grid, .speakers-grid, .moderators-grid, .downloads-grid').forEach(grid => {
+            Array.from(grid.children).forEach((card, i) => {
+                card.classList.add('reveal');
+                card.style.transitionDelay = (i * 90) + 'ms';
+            });
+        });
+        document.querySelectorAll('.veranstalter-text > p, .impressum-block, .about-text > p').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.style.transitionDelay = ((i % 8) * 80) + 'ms';
+        });
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    </script>
+</body>
+</html>
