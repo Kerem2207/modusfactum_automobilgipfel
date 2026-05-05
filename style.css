@@ -441,23 +441,46 @@ body {
     color: #003566;
 }
 
+.speaker-card p:first-of-type {
+    color: #BE9D70;
+    font-weight: 500;
+}
+
 /* Moderators Section */
 .moderators {
-    background: #fff;
+    position: relative;
+    background: #0a3a6b;
     padding: 5rem 5%;
     text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.moderators-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.moderators > *:not(.moderators-bg) {
+    position: relative;
+    z-index: 1;
 }
 
 .moderators-badge {
     display: inline-block;
     padding: 0.4rem 1.2rem;
-    background: #003566;
+    background: #fff;
     border: none;
     border-radius: 6px;
     font-family: "Be Vietnam", sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #fff;
+    color: #003566;
     margin-bottom: 1.5rem;
 }
 
@@ -466,15 +489,15 @@ body {
     font-size: 2.6rem;
     font-weight: 500;
     letter-spacing: -0.5px;
-    color: #1a1a1a;
+    color: #fff;
     margin-bottom: 3.5rem;
 }
 
 .moderators-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    max-width: 750px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4.5rem;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -507,18 +530,18 @@ body {
     font-family: "Be Vietnam", sans-serif;
     font-size: 1.7rem;
     font-weight: 500;
-    color: #1a1a1a;
+    color: #fff;
 }
 
 .moderator-card p {
     font-family: "Be Vietnam", sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
-    color: #003566;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .moderator-card p.highlight {
-    color: #003566;
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 400;
 }
 
@@ -1008,9 +1031,11 @@ body {
     }
 
     .guests-grid,
-    .speakers-grid {
+    .speakers-grid,
+    .moderators-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
+        max-width: 750px;
     }
 
     .location-content {
@@ -1211,7 +1236,7 @@ body {
     .guest-card,
     .speaker-card,
     .moderator-card {
-        flex: 0 0 70%;
+        flex: 0 0 100%;
         scroll-snap-align: center;
     }
 
@@ -1443,7 +1468,7 @@ body {
 .lang-switch a.active {
     opacity: 1;
     font-weight: 600;
-    color: #d4af37;
+    color: #BE9D70;
 }
 
 .lang-switch .lang-divider {
@@ -1458,7 +1483,7 @@ body {
 
 .header.scrolled .lang-switch a.active,
 .lang-switch a.active {
-    color: #d4af37;
+    color: #BE9D70;
 }
 
 /* Kontakt Page */
