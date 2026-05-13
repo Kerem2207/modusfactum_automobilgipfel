@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Be+Vietnam:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=29">
+    <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body>
     <header class="header">
@@ -207,7 +207,7 @@
                 <p class="location-detail">12:00–18:00</p>
                 <p class="location-detail">Inge-Beisheim-Platz 1, 10785 Berlin</p>
                 <div class="location-buttons">
-                    <a href="#anmeldung" class="btn-primary">Register</a>
+                    <a href="#gallery" class="btn-primary">View Gallery</a>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=Berlin+Marriott+Hotel%2C+Inge-Beisheim-Platz+1%2C+10785+Berlin" target="_blank" rel="noopener" class="btn-outline">To the Hotel</a>
                 </div>
             </div>
@@ -218,10 +218,46 @@
         </div>
     </section>
 
-    <section class="registration" id="anmeldung">
-        <span class="registration-badge">Registration</span>
-        <h2 class="registration-title">Registration for the event is closed!</h2>
+    <section class="gallery" id="gallery">
+        <img src="images/backgrounds/blured_background.png" alt="" class="gallery-bg">
+        <span class="gallery-badge">Impressions</span>
+        <h2 class="gallery-title">Highlights from the Summit</h2>
+        <p class="gallery-subtitle">Selected moments from the German-Turkish Automotive Summit 2025.</p>
+        <div class="gallery-grid">
+            <figure class="gallery-item" style="--i:0">
+                <img src="images/gallery/DSC05888.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:1">
+                <img src="images/gallery/DSC05905.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:2">
+                <img src="images/gallery/DSC06063.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:3">
+                <img src="images/gallery/DSC06069.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:4">
+                <img src="images/gallery/DSC06071.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:5">
+                <img src="images/gallery/DSC06074.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:6">
+                <img src="images/gallery/DSC06220.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+            <figure class="gallery-item" style="--i:7">
+                <img src="images/gallery/DSC06232.JPG" alt="Automotive Summit impression" loading="lazy">
+            </figure>
+        </div>
     </section>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&lsaquo;</button>
+        <img class="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" aria-label="Next image">&rsaquo;</button>
+        <div class="lightbox-counter"></div>
+    </div>
 
     <footer class="footer">
         <div class="footer-logo">
@@ -310,6 +346,67 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        (function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox) return;
+            const imgEl = lightbox.querySelector('.lightbox-img');
+            const counter = lightbox.querySelector('.lightbox-counter');
+            const btnClose = lightbox.querySelector('.lightbox-close');
+            const btnPrev = lightbox.querySelector('.lightbox-prev');
+            const btnNext = lightbox.querySelector('.lightbox-next');
+            let images = [];
+            let index = 0;
+
+            function refreshImages() {
+                images = Array.from(document.querySelectorAll('.gallery-item img'));
+            }
+
+            function show(i) {
+                if (!images.length) return;
+                index = (i + images.length) % images.length;
+                const src = images[index].currentSrc || images[index].src;
+                imgEl.src = src;
+                imgEl.alt = images[index].alt || '';
+                counter.textContent = (index + 1) + ' / ' + images.length;
+            }
+
+            function open(i) {
+                refreshImages();
+                if (!images.length) return;
+                show(i);
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                lightbox.classList.remove('open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            document.addEventListener('click', (e) => {
+                const item = e.target.closest('.gallery-item');
+                if (!item) return;
+                const img = item.querySelector('img');
+                if (!img) return;
+                refreshImages();
+                const i = images.indexOf(img);
+                if (i >= 0) open(i);
+            });
+
+            btnClose.addEventListener('click', close);
+            btnPrev.addEventListener('click', (e) => { e.stopPropagation(); show(index - 1); });
+            btnNext.addEventListener('click', (e) => { e.stopPropagation(); show(index + 1); });
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') show(index - 1);
+                if (e.key === 'ArrowRight') show(index + 1);
+            });
+        })();
     </script>
 </body>
 </html>
